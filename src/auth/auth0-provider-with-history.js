@@ -14,9 +14,11 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
   return (
     <Auth0Provider
-      domain={domain}
-      clientId={clientId}
+      domain="haileybongo.us.auth0.com"
+      clientId="I4RyLma2VU1ZE9CfhT1x19RaM7PrlnOC"
       redirectUri={window.location.origin}
+      audience="https://haileybongo.us.auth0.com/api/v2/"
+      scope="read:current_user update:current_user_metadata"
       onRedirectCallback={onRedirectCallback}
     >
       {children}
