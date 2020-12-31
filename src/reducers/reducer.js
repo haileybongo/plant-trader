@@ -9,7 +9,7 @@ const reducer = combineReducers({
    
 export default reducer;
 
-function userreducer(state = [], action)  {
+function UserReducer(state = [], action)  {
     switch (action.type) {
         case 'FETCH_PLAYLISTS':
             return (

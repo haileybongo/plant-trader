@@ -3,23 +3,25 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const ExternalApi = () => {
+
+    
   const serverUrl = 'http://localhost:3000/'
 
   const { getAccessTokenSilently } = useAuth0();
 
   const { user } = useAuth0();
   const { email } = user;
+    
 
   const callSecureApi = async () => {
     try {
         
       const token = await getAccessTokenSilently();
-      debugger
-      
 
-      const response = await fetch(`${serverUrl}/api/items`,{
+      const response = await fetch(`${serverUrl}/api/users`,{
         method: "POST",
         headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`},
         body: JSON.stringify({
             email: email
@@ -27,8 +29,6 @@ const ExternalApi = () => {
         });
 
       const responseData = await response.json();
-
-      debugger
     } catch (error) {
       debugger;
     }
