@@ -1,29 +1,57 @@
 import React, { Component } from 'react';
-import uploadImage from './actions/uploadImage'
+import { uploadImage } from '../actions/uploadImage'
+import { withAuth0 } from '@auth0/auth0-react';
+import { connect } from 'react-redux'
 
-export class UploadImage extends Component {
+class UploadImage extends Component {
 
 
 state = { selectedFile: null }
 
 fileChangedHandler = event => {
-debugger
   this.setState({ selectedFile: event.target.files[0] })
 }
 
-uploadHandler = () => {
-    uploadImage(his.state.selectedFile)
-}
+uploadHandler = async( event) => {
+    event.preventDefault()
+    try{
+    const { user } = this.props.auth0;
+    const { getAccessTokenSilently } = this.props.auth0;
+    const token = await getAccessTokenSilently();
+
+    const formData = new FormData(event.target)
+
+    this.props.uploadImage(formData, user.email, token)}
+    catch(error){
+        console.log(error)
+        }
+    }
+
+// uploadHandler = () => {
+//     this.props.uploadImage(this.state.selectedFile, "email", "token")
+// }
 
 
     render() {
         return (
             <div>
-                <input type="file" onChange={this.fileChangedHandler}/>
-                <button onClick={this.uploadHandler}>Upload!</button>
+                <form onSubmit={this.uploadHandler} >
+                    <label htmlFor="caption">
+                        Caption
+                        <input type="text" name="caption" />
+                    </label>
+                    <label htmlFor="image" >
+                        Upload image
+                        <input type="file" name="image" />
+                    </label>
+                    <input type="hidden" name="email" value={this.props.auth0.user.email} />
+                    <input type="submit" value="Submit"/>
+                </form>   
             </div>
         )
     }
 }
 
-export default UploadImage
+export default withAuth0(connect(null, {uploadImage})(UploadImage))
+
+//<input type="file" onChange={this.fileChangedHandler}/>

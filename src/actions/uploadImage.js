@@ -1,22 +1,23 @@
 
-export const uploadImage = () => {
 
+export const uploadImage = (formData, email, token) => {
+
+    
     let data = {
-         
+         file: formData,
+         email: email
      }
-     
+
      debugger
      return (dispatch) => {
-       fetch('http://localhost:3000/api/pictures/', {
-        method: "POST",
+       fetch('http://localhost:3000/api/pictures', {
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Authorization: `Bearer ${token}`
           },
-         body: JSON.stringify(data)
+        method: 'POST',
+        body: formData
        })
        .then(response => response.json())
-       .then(data => dispatch({type: 'FETCH_PLAYLIST', playlists: data}) )
-     }
-   
+       .then(data => dispatch({type: 'FETCH_IMAGE', images: data}) )
+        }
    }

@@ -2,7 +2,7 @@
 import { combineReducers } from "redux";
 
 const reducer = combineReducers({
-
+    UserReducer
 
   });
    
@@ -11,7 +11,7 @@ export default reducer;
 
 function UserReducer(state = [], action)  {
     switch (action.type) {
-        case 'FETCH_PLAYLISTS':
+        case 'LOGIN_USER':
             return (
                 action.playlists.data
             )
@@ -28,6 +28,15 @@ function UserReducer(state = [], action)  {
             }
         }
 
+
+function PictureReducer( state = [], action){
+    switch(action.type){
+        case 'FETCH_PICTURES':
+            return(
+                action.pictures.data
+            )
+    }
+}
 
 
     
