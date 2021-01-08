@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 class UploadImage extends Component {
 
-
 state = { selectedFile: null }
 
 fileChangedHandler = event => {
@@ -27,12 +26,10 @@ uploadHandler = async( event) => {
         }
     }
 
-// uploadHandler = () => {
-//     this.props.uploadImage(this.state.selectedFile, "email", "token")
-// }
-
+   
 
     render() {
+        
         return (
             <div>
                 <form onSubmit={this.uploadHandler} >
@@ -46,7 +43,13 @@ uploadHandler = async( event) => {
                     </label>
                     <input type="hidden" name="email" value={this.props.auth0.user.email} />
                     <input type="submit" value="Submit"/>
-                </form>   
+                </form> 
+
+                {this.props.images ? this.props.images.map( image => <div> <img src={image.attrubutes.get_image_url} /> </div>) : null}
+
+
+
+
             </div>
         )
     }

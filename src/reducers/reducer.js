@@ -2,19 +2,24 @@
 import { combineReducers } from "redux";
 
 const reducer = combineReducers({
-    UserReducer
+    Pictures,
+    User
 
   });
    
    
 export default reducer;
 
-function UserReducer(state = [], action)  {
+function User(state = [], action)  {
+    debugger
     switch (action.type) {
-        case 'LOGIN_USER':
-            return (
-                action.playlists.data
-            )
+        case 'UPDATE_USER_CREDENTIALS':
+            return {
+                email: action.data.email,
+                name: action.data.name,
+                username: action.data.nickname,
+                authID: action.data.sub
+            }
         case 'ADD_PLAYLIST':
             return (
                 action.playlists.data
@@ -29,12 +34,15 @@ function UserReducer(state = [], action)  {
         }
 
 
-function PictureReducer( state = [], action){
+function Pictures( state = [], action){
     switch(action.type){
-        case 'FETCH_PICTURES':
-            return(
-                action.pictures.data
-            )
+        case 'FETCH_USER_PICTURES':
+            return{
+                userimages: action.images.data
+            }
+        default:
+            return state;
+                
     }
 }
 

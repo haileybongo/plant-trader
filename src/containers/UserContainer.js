@@ -5,11 +5,29 @@ import UploadImage from '../components/upload-image';
 import Profile from '../components/profile';
 import ExternalApi from '../components/external-api';
 import ProtectedRoute from "../auth/protected-route";
-
+import { fetchUserImages } from '../actions/fetchUserImages'
+import { withAuth0 } from '@auth0/auth0-react';
+import { updateCredentials } from '../actions/updateCredentials'
 
 
 class UserContainer extends React.Component {
 
+    componentDidMount() {       
+        const { isLoading } = this.props.auth0;
+        const authLoading = async() => {
+            try{
+                const { getAccessTokenSilently } = this.props.auth0;
+                const token = await getAccessTokenSilently();
+                const { user } = this.props.auth0;
+                    this.props.updateCredentials(user)
+                    this.props.fetchUserImages(user.sub, token) 
+            }
+            catch{ debugger}
+            
+    }
+    authLoading();
+}
+    
 
     render() {
        
@@ -18,7 +36,7 @@ class UserContainer extends React.Component {
                 <Switch>
                 <ProtectedRoute path="/profile" component={Profile} />
                 <ProtectedRoute path="/external-api" component={ExternalApi} />
-                <ProtectedRoute path="/upload-image" component={UploadImage} />
+                <ProtectedRoute path="/upload-image" component={UploadImage} images={this.props.images}/>
                 </Switch>
             </div>
         )
@@ -26,5 +44,11 @@ class UserContainer extends React.Component {
 
 }
 
+const mapStateToProps = state => {
+    return {
+        images: state.images
+    }
+}
 
-export default connect (null, null )(UserContainer)
+
+export default withAuth0(connect (mapStateToProps, { fetchUserImages, updateCredentials})(UserContainer))
