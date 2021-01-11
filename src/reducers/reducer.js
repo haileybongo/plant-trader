@@ -11,7 +11,6 @@ const reducer = combineReducers({
 export default reducer;
 
 function User(state = [], action)  {
-    debugger
     switch (action.type) {
         case 'UPDATE_USER_CREDENTIALS':
             return {

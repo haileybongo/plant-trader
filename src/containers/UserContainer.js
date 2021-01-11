@@ -13,7 +13,6 @@ import { updateCredentials } from '../actions/updateCredentials'
 class UserContainer extends React.Component {
 
     componentDidMount() {       
-        const { isLoading } = this.props.auth0;
         const authLoading = async() => {
             try{
                 const { getAccessTokenSilently } = this.props.auth0;
@@ -30,13 +29,12 @@ class UserContainer extends React.Component {
     
 
     render() {
-       
         return(
             <div>
                 <Switch>
                 <ProtectedRoute path="/profile" component={Profile} />
                 <ProtectedRoute path="/external-api" component={ExternalApi} />
-                <ProtectedRoute path="/upload-image" component={UploadImage} images={this.props.images}/>
+                <Route path="/upload-image" render={() => <UploadImage images={this.props.images} />}/>  
                 </Switch>
             </div>
         )
@@ -46,7 +44,7 @@ class UserContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        images: state.images
+        images: state.Pictures
     }
 }
 

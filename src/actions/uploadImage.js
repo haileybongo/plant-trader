@@ -1,7 +1,7 @@
-export const uploadImage = (formData, email, token) => {
+export const uploadImage = (formData, userId, token) => {
 
      return (dispatch) => {
-       fetch('http://localhost:3000/api/pictures', {
+       fetch('http://localhost:3000/api/pictures/' + userId + '/new', {
         headers: {
             Authorization: `Bearer ${token}`
           },
