@@ -11,18 +11,22 @@ const reducer = combineReducers({
 export default reducer;
 
 function User(state = [], action)  {
+    debugger
     switch (action.type) {
         case 'UPDATE_USER_CREDENTIALS':
             return {
+                ...state,
                 email: action.data.email,
                 name: action.data.name,
                 username: action.data.nickname,
                 authID: action.data.sub
             }
-        case 'ADD_PLAYLIST':
-            return (
-                action.playlists.data
-            )
+        case 'GET_USER_INFO':
+            return {
+                ...state,
+                bio: action.profile.bio,
+                username: action.profile.username
+            }
         case 'DELETE_PLAYLIST':
             const idx = state.findIndex(playlist => playlist.id === action.id);
             return [...state.slice(0,idx), ...state.slice(idx+1)]  
@@ -34,6 +38,7 @@ function User(state = [], action)  {
 
 
 function Pictures( state = [], action){
+  
     switch(action.type){
         case 'FETCH_USER_PICTURES':
             return{

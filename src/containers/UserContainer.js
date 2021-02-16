@@ -8,6 +8,8 @@ import ProtectedRoute from "../auth/protected-route";
 import { fetchUserImages } from '../actions/fetchUserImages'
 import { withAuth0 } from '@auth0/auth0-react';
 import { updateCredentials } from '../actions/updateCredentials'
+import { fetchProfile } from '../actions/fetchProfile'
+import EditProfile from '../components/edit-profile';
 
 
 class UserContainer extends React.Component {
@@ -19,7 +21,8 @@ class UserContainer extends React.Component {
                 const token = await getAccessTokenSilently();
                 const { user } = this.props.auth0;
                     this.props.updateCredentials(user)
-                    this.props.fetchUserImages(user.sub, token) 
+                    this.props.fetchUserImages(user.sub, token)
+                    this.props.fetchProfile(user.sub, token) 
             }
             catch{ debugger}
             
@@ -29,12 +32,15 @@ class UserContainer extends React.Component {
     
 
     render() {
+        debugger
+
         return(
             <div>
                 <Switch>
-                <ProtectedRoute path="/profile" component={Profile} />
+                <Route path="/profile" render={() => <Profile user={this.props.user} images={this.props.images} /> }/>
                 <ProtectedRoute path="/external-api" component={ExternalApi} />
                 <Route path="/upload-image" render={() => <UploadImage images={this.props.images} />}/>  
+                <Route path="/edit-profile" render={() => <EditProfile user={this.props.user} />}/>  
                 </Switch>
             </div>
         )
@@ -44,9 +50,10 @@ class UserContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        images: state.Pictures
+        images: state.Pictures,
+        user: state.User
     }
 }
 
 
-export default withAuth0(connect (mapStateToProps, { fetchUserImages, updateCredentials})(UserContainer))
+export default withAuth0(connect (mapStateToProps, { fetchUserImages, updateCredentials, fetchProfile})(UserContainer))

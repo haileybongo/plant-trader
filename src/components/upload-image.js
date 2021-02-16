@@ -23,7 +23,6 @@ uploadHandler = async( event) => {
    
 
     render() {
-        debugger
         return (
             <div>
                 <form onSubmit={this.uploadHandler} >
@@ -49,4 +48,3 @@ uploadHandler = async( event) => {
 
 export default withAuth0( connect (null, {uploadImage})(UploadImage))
 
-//{this.props.images.userimages ? this.props.images.userimages.map( image => <div> <img src={image.attrubutes.get_image_url} /> </div>) : null}
