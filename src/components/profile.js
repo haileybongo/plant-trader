@@ -12,21 +12,16 @@ const Profile = (props) => {
         <div className="col-md-2 mb-3">
           <img
             src={props.user.picture}
-            alt="Profile"
+            alt=" "
             className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
           />
         </div>
         <div className="col-md text-center text-md-left">
           <h2>{props.user.username}</h2>
-          <p className="lead text-muted">{props.user.email}</p>
+          <p className="lead text-muted">{props.user.bio}</p>
         </div>
       </div>
-      <div className="row">
-        <pre className="col-12 text-light bg-dark p-4">
-          {JSON.stringify(props.user, null, 2)}
-        </pre>
-      </div>
-      {props.images.userimages ? props.images.userimages.map( image => <div> <img src={image.attributes.get_image_url} /> </div>) : null}
+      {props.images.userimages ? props.images.userimages.map( image => <div > <img src={image.attributes.get_image_url} className="feed-picture"/> </div>) : null}
     </div>
   );
 };

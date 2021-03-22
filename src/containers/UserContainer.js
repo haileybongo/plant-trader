@@ -32,9 +32,8 @@ class UserContainer extends React.Component {
     
 
     render() {
-        debugger
-
-        return(
+  
+      return(
             <div>
                 <Switch>
                 <Route path="/profile" render={() => <Profile user={this.props.user} images={this.props.images} /> }/>

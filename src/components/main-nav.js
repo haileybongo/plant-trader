@@ -20,12 +20,20 @@ const MainNav = () => (
       Profile
     </NavLink>
     <NavLink
-      to="/external-api"
+      to="/edit-profile"
       exact
       className="nav-link"
       activeClassName="router-link-exact-active"
     >
-      External API
+      Edit Profile
+    </NavLink>
+    <NavLink
+      to="/upload-image"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      New Image
     </NavLink>
   </div>
 );

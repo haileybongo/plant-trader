@@ -36,9 +36,7 @@ uploadHandler = async( event) => {
                     </label>
                     <input type="hidden" name="id" id="id" />
                     <input type="submit" value="Submit"/>
-                </form> 
-
-                {this.props.images.userimages ? this.props.images.userimages.map( image => <div> <img src={image.attributes.get_image_url} /> </div>) : null}
+                </form>
             </div>
         )
     }

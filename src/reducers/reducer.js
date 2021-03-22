@@ -11,7 +11,6 @@ const reducer = combineReducers({
 export default reducer;
 
 function User(state = [], action)  {
-    debugger
     switch (action.type) {
         case 'UPDATE_USER_CREDENTIALS':
             return {
@@ -27,9 +26,6 @@ function User(state = [], action)  {
                 bio: action.profile.bio,
                 username: action.profile.username
             }
-        case 'DELETE_PLAYLIST':
-            const idx = state.findIndex(playlist => playlist.id === action.id);
-            return [...state.slice(0,idx), ...state.slice(idx+1)]  
         
         default:
             return state;
