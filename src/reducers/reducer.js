@@ -38,8 +38,14 @@ function Pictures( state = [], action){
     switch(action.type){
         case 'FETCH_USER_PICTURES':
             return{
+                ...state,
                 userimages: action.images.data
             }
+        case 'FETCH_ALL_IMAGES':
+                return{
+                    ...state,
+                    allImages: action.images.data
+                }
         default:
             return state;
                 

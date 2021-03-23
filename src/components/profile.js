@@ -21,7 +21,7 @@ const Profile = (props) => {
           <p className="lead text-muted">{props.user.bio}</p>
         </div>
       </div>
-      {props.images.userimages ? props.images.userimages.map( image => <div > <img src={image.attributes.get_image_url} className="feed-picture"/> </div>) : null}
+      {props.images.userimages ? props.images.userimages.map( image => <div > <img src={image.attributes.get_image_url} className="feed-picture"/>  <div> {image.attributes.caption} </div></div>) : null}
     </div>
   );
 };
