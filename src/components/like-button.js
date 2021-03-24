@@ -4,22 +4,14 @@ import React from 'react'
 
 const Like = (props) => {
 
-
-  const handleLike = async () => {
-        try{
-        const { getAccessTokenSilently } = this.props.auth0;
-        const token = await getAccessTokenSilently();
-        this.props.likePhoto(props.user, props.image, token)}
-        catch(error){
-            console.log(error)
-            }
-            
+  const handleLike = () => {
+        props.likeImage(props.user, props.image)         
         }
 
   return (
     <div  className="container" width="100px" >
         <br/>
-        <button onClick={ ()=> handleLike()}>Like </button>
+        <button onClick={handleLike}>Like </button>
     </div>
 
   )

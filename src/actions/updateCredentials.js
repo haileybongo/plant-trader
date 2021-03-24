@@ -1,6 +1,6 @@
-export const updateCredentials = (userInfo) => {
-    
+export const updateCredentials = (userInfo, token) => {
+
     return (dispatch) => {
-        dispatch({type: 'UPDATE_USER_CREDENTIALS', data: userInfo})}
+        dispatch({type: 'UPDATE_USER_CREDENTIALS', data: userInfo, token})}
 
   }

@@ -1,14 +1,18 @@
-export const likeImage = (user, image, token) => {
+export const likeImage = (user, image) => {
+
+    let data = {user, image};
+
+    debugger
 
     return (dispatch) => {
-      fetch('http://localhost:3000/api/users/' + userId, {
+      fetch('http://localhost:3000/api/likes', {
        headers: {
-           Authorization: `Bearer ${token}`
+           Authorization: `Bearer ${user.token}`
          },
-       method: 'PATCH',
-       body: formData
+       method: 'POST',
+       body: JSON.stringify(data)
       })
       .then(response => response.json())
-      .then(data => dispatch({type: 'GET_USER_INFO', profile: data.data.attributes})  )
+      .then(data => dispatch({type: 'FETCH_ALL_IMAGES', images: data})  )
        }
   }

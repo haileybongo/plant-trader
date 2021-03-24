@@ -21,7 +21,7 @@ class UserContainer extends React.Component {
                 const { getAccessTokenSilently } = this.props.auth0;
                 const token = await getAccessTokenSilently();
                 const { user } = this.props.auth0;
-                    this.props.updateCredentials(user)
+                    this.props.updateCredentials(user, token)
                     this.props.fetchUserImages(user.sub, token)
                     this.props.fetchProfile(user.sub, token) 
                     this.props.fetchAllImages(token)

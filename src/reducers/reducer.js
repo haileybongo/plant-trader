@@ -18,7 +18,8 @@ function User(state = [], action)  {
                 email: action.data.email,
                 name: action.data.name,
                 username: action.data.nickname,
-                authID: action.data.sub
+                authID: action.data.sub,
+                token: action.token
             }
         case 'GET_USER_INFO':
             return {
@@ -44,7 +45,7 @@ function Pictures( state = [], action){
         case 'FETCH_ALL_IMAGES':
                 return{
                     ...state,
-                    allImages: action.images.data
+                allImages: action.images.data
                 }
         default:
             return state;
