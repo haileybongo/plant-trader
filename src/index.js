@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import reducer from './reducers/reducer'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom'
 import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
 

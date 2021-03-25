@@ -2,7 +2,6 @@ export const likeImage = (user, image) => {
 
     let data = {user, image};
 
-    debugger
 
     return (dispatch) => {
       fetch('http://localhost:3000/api/likes', {

@@ -6,17 +6,22 @@ import { connect } from 'react-redux'
 export class EditProfile extends Component {
 
 
-profileHandler = async( event) => {
-    event.preventDefault()
-    try{
-    const { user } = this.props.auth0;
-    const { getAccessTokenSilently } = this.props.auth0;
-    const token = await getAccessTokenSilently();
-    const formData = new FormData(event.target)
-    this.props.editProfile(formData, user.sub, token)}
-    catch(error){
-        console.log(error)
-        }
+    state = {
+        username: this.props.user ? this.props.user.username : null,
+        bio: this.props.user ? this.props.user.bio : null
+      }
+
+    handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+      }
+
+
+profileHandler = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    this.props.editProfile(formData, this.props.user.authID, this.props.user.token)
     }
 
 
@@ -26,11 +31,11 @@ profileHandler = async( event) => {
                     <form onSubmit={this.profileHandler} >
                     <label htmlFor="Username">
                         Username
-                        <input type="text" name="username" value={this.props.user ? this.props.user.username : null}/>
+                        <input type="text" name="username" onChange={this.handleChange} value={this.state.username}/>
                     </label>
                     <label htmlFor="Bio" >
                         Bio
-                        <input type="text" name="bio" value={this.props.user ? this.props.user.bio :null}/>
+                        <input type="text" name="bio" onChange={this.handleChange} value={this.state.bio}/>
                     </label>
                     <input type="submit" value="Submit"/>
                 </form> 
